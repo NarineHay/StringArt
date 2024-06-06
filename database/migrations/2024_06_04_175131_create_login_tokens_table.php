@@ -14,7 +14,6 @@ return new class extends Migration
         Schema::create('login_tokens', function (Blueprint $table) {
             $table->id();
             $table->string('token');
-            $table->string('status');
             $table->timestamps();
         });
     }

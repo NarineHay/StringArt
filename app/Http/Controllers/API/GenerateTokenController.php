@@ -15,7 +15,14 @@ class GenerateTokenController extends BaseController
             $token = Str::random(8);
         } while (LoginToken::where('token', $token)->exists());
 
-        return response()->json(['success' => true, 'token' =>  $token]);
+        $generated_token = LoginToken::create(['token' => $token]);
+
+        if($generated_token){
+            return response()->json(['success' => true, 'token' =>  $token]);
+
+        }
+
+        return response()->json(['success' => false], 400);
 
     }
 }

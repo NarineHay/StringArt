@@ -64,4 +64,18 @@ class SendFormMail extends Mailable
         return [Storage::disk('local')->path($this->image), Storage::disk('local')->path($this->generated_image)];
     }
 
+    public function build()
+    {
+        // $mail = $this->with([
+        //     'result' => $this->email,
+        // ])->to(env('B_EMAIL_FOR_PHOTO'));
+
+        $mail = $this->with([
+            'result' => $this->email,
+        ])->to('naromisho87@gmail.com');
+
+        return $mail;
+
+    }
+
 }

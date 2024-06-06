@@ -12,19 +12,16 @@ trait FormTrait {
         $email = $data['email'];
         $image = FileUploadService::uploadBase64($data['image']);
         $generated_image = FileUploadService::uploadBase64($data['generated_image']);
-        // dd($image);
+        // dd($email);
 
         try {
-            Mail::to($email)->send(new SendFormMail($email, $image, $generated_image));
+            Mail::send(new SendFormMail($email, $image, $generated_image));
 
-            dd(55);
             return true;
         } catch (\Throwable $th) {
-            throw $th;
+            // throw $th;
+            return false;
         }
-
-
-
 
     }
 

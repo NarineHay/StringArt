@@ -13,14 +13,16 @@ class CreateUserSeeder extends Seeder
      */
     public function run(): void
     {
-        $user = User::where('email', 'admin@gmail.com')->first();
+        $email = env('B_EMAIL');
+        $password = env('B_PASSWORD');
+        $user = User::where('email', $email)->first();
 
         if(!$user){
             $user = User::updateOrCreate(
-              ['email' => 'admin@gmail.com'],
+              ['email' => $email],
               [
                 'name' => 'Admin',
-                'password' => bcrypt('123456')
+                'password' => bcrypt($password)
               ]);
         }
 

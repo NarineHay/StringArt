@@ -16,9 +16,18 @@ class CheckTokenController extends Controller
         $check_token = LoginToken::where('token', $token)->first();
 
         if($check_token){
-            return response()->json(['success' => true]);
+            $check_token->update(['quantity_of_uses' => $check_token->quantity_of_uses + 1]);
+            if($check_token->quantity_of_uses < 4){
+
+                return response()->json(['success' => true]);
+
+            }
+            else{
+                return response()->json(['completed' => true], 400);
+
+            }
         }
 
-        return response()->json(['success' => false], 400);
+        return response()->json(['undefined_token' => false], 400);
     }
 }
